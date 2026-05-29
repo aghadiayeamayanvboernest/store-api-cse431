@@ -1,0 +1,83 @@
+# Store API - Test Requests
+
+### Get all products
+GET http://localhost:3000/products
+
+###
+
+### Get single product by ID
+GET http://localhost:3000/products/REPLACE_WITH_REAL_ID
+
+###
+
+### Create a new product
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "Wireless Headphones",
+  "description": "High quality noise-cancelling wireless headphones",
+  "price": 99.99,
+  "category": "Electronics",
+  "brand": "Sony",
+  "stock": 50,
+  "rating": 4.5
+}
+
+###
+
+### Update a product
+PUT http://localhost:3000/products/REPLACE_WITH_REAL_ID
+Content-Type: application/json
+
+{
+  "name": "Wireless Headphones Pro",
+  "description": "Updated noise-cancelling wireless headphones",
+  "price": 129.99,
+  "category": "Electronics",
+  "brand": "Sony",
+  "stock": 30,
+  "rating": 4.8
+}
+
+###
+
+### Delete a product
+DELETE http://localhost:3000/products/REPLACE_WITH_REAL_ID
+
+###
+
+### Get all categories
+GET http://localhost:3000/categories
+
+###
+
+### Get single category by ID
+GET http://localhost:3000/categories/REPLACE_WITH_REAL_ID
+
+###
+
+### Create a new category
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+  "name": "Electronics",
+  "description": "Electronic devices and accessories"
+}
+
+###
+
+### Update a category
+PUT http://localhost:3000/categories/REPLACE_WITH_REAL_ID
+Content-Type: application/json
+
+{
+  "name": "Electronics & Gadgets",
+  "description": "Electronic devices, gadgets and accessories"
+}
+
+###
+
+### Delete a category
+DELETE http://localhost:3000/categories/REPLACE_WITH_REAL_ID

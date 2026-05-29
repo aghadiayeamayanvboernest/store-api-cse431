@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Store API",
+    "description": "API for managing products and categories in an online store. Supports full CRUD operations.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "tags": [
+    { "name": "Products", "description": "Operations for managing products" },
+    { "name": "Categories", "description": "Operations for managing categories" }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get all products",
+        "description": "Returns a list of all products in the database.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "A list of products",
+            "schema": { "type": "array", "items": { "$ref": "#/definitions/Product" } }
+          },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "post": {
+        "tags": ["Products"],
+        "summary": "Create a new product",
+        "description": "Creates a new product. All 7 fields are required.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ProductInput" }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Product created successfully" },
+          "400": { "description": "Bad Request - missing or invalid fields" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get a single product by ID",
+        "description": "Returns a single product matching the provided MongoDB ObjectId.",
+        "produces": ["application/json"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "MongoDB ObjectId of the product" }
+        ],
+        "responses": {
+          "200": { "description": "A single product", "schema": { "$ref": "#/definitions/Product" } },
+          "400": { "description": "Invalid ID format" },
+          "404": { "description": "Product not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "put": {
+        "tags": ["Products"],
+        "summary": "Update a product by ID",
+        "description": "Replaces all fields of an existing product. All fields are required.",
+        "consumes": ["application/json"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/ProductInput" } }
+        ],
+        "responses": {
+          "204": { "description": "Product updated successfully" },
+          "400": { "description": "Bad Request - invalid ID or missing fields" },
+          "404": { "description": "Product not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "delete": {
+        "tags": ["Products"],
+        "summary": "Delete a product by ID",
+        "description": "Permanently deletes a product from the database.",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Product deleted successfully" },
+          "400": { "description": "Invalid ID format" },
+          "404": { "description": "Product not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get all categories",
+        "description": "Returns a list of all categories in the database.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "A list of categories",
+            "schema": { "type": "array", "items": { "$ref": "#/definitions/Category" } }
+          },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "post": {
+        "tags": ["Categories"],
+        "summary": "Create a new category",
+        "description": "Creates a new category. Both fields are required.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/CategoryInput" } }
+        ],
+        "responses": {
+          "201": { "description": "Category created successfully" },
+          "400": { "description": "Bad Request - missing fields" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get a single category by ID",
+        "description": "Returns a single category matching the provided MongoDB ObjectId.",
+        "produces": ["application/json"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "A single category", "schema": { "$ref": "#/definitions/Category" } },
+          "400": { "description": "Invalid ID format" },
+          "404": { "description": "Category not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "put": {
+        "tags": ["Categories"],
+        "summary": "Update a category by ID",
+        "description": "Replaces all fields of an existing category. Both fields are required.",
+        "consumes": ["application/json"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/CategoryInput" } }
+        ],
+        "responses": {
+          "204": { "description": "Category updated successfully" },
+          "400": { "description": "Bad Request - invalid ID or missing fields" },
+          "404": { "description": "Category not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "delete": {
+        "tags": ["Categories"],
+        "summary": "Delete a category by ID",
+        "description": "Permanently deletes a category from the database.",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Category deleted successfully" },
+          "400": { "description": "Invalid ID format" },
+          "404": { "description": "Category not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "type": "object",
+      "properties": {
+        "_id": { "type": "string", "example": "64a1b2c3d4e5f6789012345a" },
+        "name": { "type": "string", "example": "Wireless Headphones" },
+        "description": { "type": "string", "example": "High quality noise-cancelling wireless headphones" },
+        "price": { "type": "number", "example": 99.99 },
+        "category": { "type": "string", "example": "Electronics" },
+        "brand": { "type": "string", "example": "Sony" },
+        "stock": { "type": "number", "example": 50 },
+        "rating": { "type": "number", "example": 4.5 }
+      }
+    },
+    "ProductInput": {
+      "type": "object",
+      "required": ["name", "description", "price", "category", "brand", "stock", "rating"],
+      "properties": {
+        "name": { "type": "string", "example": "Wireless Headphones" },
+        "description": { "type": "string", "example": "High quality noise-cancelling wireless headphones" },
+        "price": { "type": "number", "example": 99.99 },
+        "category": { "type": "string", "example": "Electronics" },
+        "brand": { "type": "string", "example": "Sony" },
+        "stock": { "type": "number", "example": 50 },
+        "rating": { "type": "number", "example": 4.5 }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "_id": { "type": "string", "example": "64a1b2c3d4e5f6789012345a" },
+        "name": { "type": "string", "example": "Electronics" },
+        "description": { "type": "string", "example": "Electronic devices and accessories" }
+      }
+    },
+    "CategoryInput": {
+      "type": "object",
+      "required": ["name", "description"],
+      "properties": {
+        "name": { "type": "string", "example": "Electronics" },
+        "description": { "type": "string", "example": "Electronic devices and accessories" }
+      }
+    }
+  }
+}
