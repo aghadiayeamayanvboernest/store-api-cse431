@@ -5,9 +5,9 @@
     "description": "API for managing products and categories in an online store. Supports full CRUD operations.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "store-api-cse431.onrender.com",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "tags": [
     { "name": "Products", "description": "Operations for managing products" },
     { "name": "Categories", "description": "Operations for managing categories" }
